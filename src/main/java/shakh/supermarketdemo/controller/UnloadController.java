@@ -86,10 +86,8 @@ public class UnloadController
         p.setPriceOfBuy(unloaded.getPriceOfBuy());
         service.saveUpdate(p);
 
-
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(unloaded.getId()).toUri();
        return  ResponseEntity.created(location).build();
     }
-
 }

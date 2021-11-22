@@ -16,7 +16,7 @@ public class Payment
     private long id;
 
     @ManyToOne
-    private User user;
+    private Debitors user;
 
     private double amount;
     private Date createdTime;

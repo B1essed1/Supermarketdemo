@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 
-public class User
+public class Debitors
 {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)

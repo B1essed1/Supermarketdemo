@@ -57,7 +57,7 @@ public class ProductController
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
-                .buildAndExpand(product1.getBarcode())
+                .buildAndExpand(product1.getId())
                 .toUri();
         return ResponseEntity.created(location).build();
     }

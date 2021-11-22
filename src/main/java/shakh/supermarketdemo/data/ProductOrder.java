@@ -21,7 +21,7 @@ public class ProductOrder
     List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne()
-    private User user;
+    private Debitors user;
 
     private double paidCost;
     private double totalCost;
