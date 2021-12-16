@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class Unload
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE )
+    @GeneratedValue(strategy = GenerationType.SEQUENCE   )
     @Column(name ="id")
     private Long id;
 

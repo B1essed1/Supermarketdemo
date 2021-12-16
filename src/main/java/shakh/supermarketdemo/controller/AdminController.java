@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import shakh.supermarketdemo.data.Admins;
+import shakh.supermarketdemo.data.securitymodel.Admins;
 import shakh.supermarketdemo.service.AdminService;
 
 import java.net.URI;
@@ -31,7 +31,6 @@ public class AdminController
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
                 .buildAndExpand(admins.getId()).toUri();
-
 
        return ResponseEntity.created(location).build();
     }

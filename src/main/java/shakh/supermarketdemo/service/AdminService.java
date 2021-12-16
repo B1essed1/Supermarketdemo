@@ -1,6 +1,6 @@
 package shakh.supermarketdemo.service;
 
-import shakh.supermarketdemo.data.Admins;
+import shakh.supermarketdemo.data.securitymodel.Admins;
 
 public interface AdminService
 {
