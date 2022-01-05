@@ -1,3 +1,4 @@
+/*
 package shakh.supermarketdemo.security;
 
 import org.springframework.context.annotation.Bean;
@@ -69,3 +70,4 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 
 
 }
+*/

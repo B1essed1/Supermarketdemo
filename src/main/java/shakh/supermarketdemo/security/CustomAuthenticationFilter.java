@@ -1,3 +1,4 @@
+/*
 package shakh.supermarketdemo.security;
 
 import com.auth0.jwt.JWT;
@@ -66,3 +67,4 @@ public class CustomAuthenticationFilter extends UsernamePasswordAuthenticationFi
         tokens.put("refresh_token" , refreshToken);
     }
 }
+*/

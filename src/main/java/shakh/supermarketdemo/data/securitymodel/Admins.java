@@ -2,13 +2,18 @@ package shakh.supermarketdemo.data.securitymodel;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import shakh.supermarketdemo.data.ProductOrder;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 public class Admins
 {
     @Id
@@ -16,6 +21,9 @@ public class Admins
     private Long id;
     private String username;
     private String password;
+
+    @OneToMany(mappedBy ="admins" ,orphanRemoval = true,cascade = CascadeType.ALL)
+    List<ProductOrder> orders = new ArrayList<>();
 
     @ManyToMany(cascade = {
             CascadeType.PERSIST,
@@ -25,7 +33,6 @@ public class Admins
             name = "Admins_Role",
             joinColumns = { @JoinColumn(name = "admin_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") })
-    @JsonManagedReference
     Collection<Role> roles = new ArrayList<>();
 
 

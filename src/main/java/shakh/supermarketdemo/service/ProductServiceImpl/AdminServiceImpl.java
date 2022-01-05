@@ -1,3 +1,4 @@
+/*
 package shakh.supermarketdemo.service.ProductServiceImpl;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -51,3 +52,4 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
          adminRepository.deleteById(id);
     }
 }
+*/

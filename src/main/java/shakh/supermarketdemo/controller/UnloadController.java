@@ -76,7 +76,7 @@ public class UnloadController
     }
 
 
-    @PostMapping
+    @PostMapping("/unload/save")
     public ResponseEntity<Unload> saveOnlyUnload(@RequestBody Unload unload)
     {
         Unload unloaded = unloadService.save(unload);

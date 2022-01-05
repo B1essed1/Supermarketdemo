@@ -65,9 +65,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
             <version>2.5.5</version>
         </dependency>
+<!--
 
 
-        <!-- https://mvnrepository.com/artifact/org.springframework.security/spring-security-core -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/org.springframework.security/spring-security-core &ndash;&gt;
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
@@ -80,7 +81,7 @@
             <version>5.5.3</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+        &lt;!&ndash; https://mvnrepository.com/artifact/com.auth0/java-jwt &ndash;&gt;
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
@@ -92,6 +93,7 @@
             <artifactId>spring-security-web</artifactId>
             <version>5.5.3</version>
         </dependency>
+-->
 
 
     </dependencies>

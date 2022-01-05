@@ -16,8 +16,12 @@ public class Payment
     private long id;
 
     @ManyToOne
-    private Debitors user;
+    private Debitors debitors;
 
     private double amount;
+
+    @ManyToOne
+    private ProductOrder productOrder;
+
     private Date createdTime;
 }

@@ -18,7 +18,6 @@ public class Role
     private String name;
 
     @ManyToMany(mappedBy = "roles")
-    @JsonBackReference
     Collection<Admins> admins = new ArrayList<>();
 
 }
