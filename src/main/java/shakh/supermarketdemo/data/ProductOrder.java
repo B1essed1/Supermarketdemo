@@ -3,6 +3,7 @@ package shakh.supermarketdemo.data;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.Cascade;
 import shakh.supermarketdemo.data.securitymodel.Admins;
 
 import javax.persistence.*;
@@ -28,16 +29,15 @@ public class ProductOrder
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
     List<OrderItem> orderItems = new ArrayList<>();
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne()
+    @JoinColumn(name = "debitor_id")
     private Debitors debitors;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
     private List<Payment> payment=  new ArrayList<>();
 
-
     @JsonBackReference
     @ManyToOne()
+    @JoinColumn(name = "admin_id")
     private Admins admins;
-
-
 }

@@ -1,8 +1,7 @@
-package shakh.supermarketdemo.service.ProductServiceImpl;
+package shakh.supermarketdemo.service.ServicesImpls;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import shakh.supermarketdemo.data.Product;
 import shakh.supermarketdemo.data.Unload;
 import shakh.supermarketdemo.exceptions.UnloadNotFoundException;
 import shakh.supermarketdemo.repository.UnloadRepository;

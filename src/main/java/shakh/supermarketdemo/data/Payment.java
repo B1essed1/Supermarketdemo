@@ -16,11 +16,13 @@ public class Payment
     private long id;
 
     @ManyToOne
+    @JoinColumn(name= "debitor_id")
     private Debitors debitors;
 
     private double amount;
 
     @ManyToOne
+    @JoinColumn(name = "order_id")
     private ProductOrder productOrder;
 
     private Date createdTime;

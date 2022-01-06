@@ -1,9 +1,11 @@
-package shakh.supermarketdemo.service.ProductServiceImpl;
+package shakh.supermarketdemo.service.ServicesImpls;
 
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.ProductOrder;
 import shakh.supermarketdemo.repository.ProductOrderRepository;
 import shakh.supermarketdemo.service.ProductOrderService;
+
+import javax.transaction.Transactional;
 
 @Service
 public class ProductOrderServiceImpl implements ProductOrderService
@@ -15,7 +17,10 @@ public class ProductOrderServiceImpl implements ProductOrderService
     }
 
     @Override
+    @Transactional
     public ProductOrder save(ProductOrder order) {
-        return productOrderRepository.save(order);
+        ProductOrder productOrder = productOrderRepository.save(order);
+        return productOrder;
+
     }
 }

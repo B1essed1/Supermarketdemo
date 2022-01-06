@@ -22,7 +22,7 @@ public class Debitors
 
     private String phoneNumber;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "debitors" )
+    @OneToMany(cascade = CascadeType.ALL,mappedBy = "debitors",orphanRemoval = true )
     private List<ProductOrder> orderList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "debitors")

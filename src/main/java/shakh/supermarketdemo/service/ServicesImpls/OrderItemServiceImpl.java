@@ -1,4 +1,4 @@
-package shakh.supermarketdemo.service.ProductServiceImpl;
+package shakh.supermarketdemo.service.ServicesImpls;
 
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.OrderItem;
@@ -11,7 +11,6 @@ import java.util.List;
 @Service
 public class OrderItemServiceImpl implements OrderItemService {
 
-
     private final OrderItemRepository orderItemRepository;
 
     public OrderItemServiceImpl(OrderItemRepository orderItemRepository) {
@@ -23,5 +22,11 @@ public class OrderItemServiceImpl implements OrderItemService {
     {
         List<OrderItem> orderItems = orderItemRepository.findByProductOrder(order);
         return orderItems;
+    }
+
+    @Override
+    public OrderItem save(OrderItem orderItem)
+    {
+        return orderItemRepository.save(orderItem);
     }
 }

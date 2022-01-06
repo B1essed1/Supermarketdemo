@@ -1,29 +1,26 @@
-/*
-package shakh.supermarketdemo.service.ProductServiceImpl;
 
+package shakh.supermarketdemo.service.ServicesImpls;
+/*
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;*/
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.securitymodel.Admins;
 import shakh.supermarketdemo.repository.AdminRepository;
 import shakh.supermarketdemo.service.AdminService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 @Service
-public class AdminServiceImpl implements AdminService , UserDetailsService {
+public class AdminServiceImpl implements AdminService /*, UserDetailsService */{
 
-    private final AdminRepository adminRepository;
+   private final AdminRepository adminRepository;
 
     public AdminServiceImpl(AdminRepository adminRepository) {
         this.adminRepository = adminRepository;
 
     }
-
+/*
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Admins user = adminRepository.findByUsername(s);
@@ -40,7 +37,7 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
 
     }
 
-    @Override
+   */ @Override
     public Admins save(Admins admins)
     {
         //admins.setPassword(passwordEncoder.encode(admins.getPassword()));
@@ -52,4 +49,4 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
          adminRepository.deleteById(id);
     }
 }
-*/
+

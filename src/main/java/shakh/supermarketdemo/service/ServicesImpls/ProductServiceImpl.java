@@ -1,4 +1,4 @@
-package shakh.supermarketdemo.service.ProductServiceImpl;
+package shakh.supermarketdemo.service.ServicesImpls;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

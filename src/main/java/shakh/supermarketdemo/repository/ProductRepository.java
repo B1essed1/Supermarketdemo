@@ -7,7 +7,7 @@ import shakh.supermarketdemo.data.Product;
 import shakh.supermarketdemo.data.Unload;
 
 import java.util.Optional;
-import java.util.Set;
+
 
 @Repository
 public interface ProductRepository  extends CrudRepository<Product,Long>

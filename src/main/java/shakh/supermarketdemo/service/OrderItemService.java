@@ -8,4 +8,5 @@ import java.util.List;
 public interface OrderItemService
 {
     List<OrderItem> getByProductOrder(ProductOrder order);
+    OrderItem save(OrderItem orderItem);
 }

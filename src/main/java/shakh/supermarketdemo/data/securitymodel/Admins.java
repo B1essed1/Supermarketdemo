@@ -1,7 +1,5 @@
 package shakh.supermarketdemo.data.securitymodel;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import shakh.supermarketdemo.data.ProductOrder;
@@ -34,6 +32,5 @@ public class Admins
             joinColumns = { @JoinColumn(name = "admin_id") },
             inverseJoinColumns = { @JoinColumn(name = "role_id") })
     Collection<Role> roles = new ArrayList<>();
-
 
 }
