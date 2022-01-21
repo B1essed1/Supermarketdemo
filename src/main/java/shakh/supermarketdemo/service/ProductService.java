@@ -11,6 +11,12 @@ public interface ProductService {
 
     Product save(Product product);
 
+    void hardDeleteProductById(Long id);
+
+    void softDeleteProductById(Long id);
+    Boolean checkProductByBarcode(int barcode);
+
+
     Set<Product> findBetweenLastWeak();
 
     Set<Product> findByCount();

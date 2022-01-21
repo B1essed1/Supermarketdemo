@@ -14,16 +14,20 @@ import java.time.LocalDateTime;
 public class Unload
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE   )
-    @Column(name ="id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private double amount;
     private double priceOfBuy;
+    private double priceOfSell;
+
+    private boolean isActive = true ;
+
+
     private LocalDateTime createdTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JsonBackReference
-    @JoinColumn(name="product_id")
+    @JoinColumn(name = "product_id" , referencedColumnName = "product_id",insertable = false,updatable = false)
     private Product product;
 }

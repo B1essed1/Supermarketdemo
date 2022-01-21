@@ -6,6 +6,8 @@ import shakh.supermarketdemo.repository.ProductOrderRepository;
 import shakh.supermarketdemo.service.ProductOrderService;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class ProductOrderServiceImpl implements ProductOrderService
@@ -14,6 +16,14 @@ public class ProductOrderServiceImpl implements ProductOrderService
 
     public ProductOrderServiceImpl(ProductOrderRepository productOrderRepository) {
         this.productOrderRepository = productOrderRepository;
+    }
+
+    @Override
+    public List<ProductOrder> getAllOrders() {
+
+        List orders = new ArrayList();
+        productOrderRepository.findAll().forEach(orders::add);
+        return orders;
     }
 
     @Override

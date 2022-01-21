@@ -10,15 +10,21 @@ import javax.persistence.*;
 public class OrderItem
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+    private boolean isActive = true ;
+
+    private double priceOfBuy;
+
+    private double priceOfSell;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(referencedColumnName = "product_order_id",name="product_order_id",insertable = false,updatable = false)
     private ProductOrder productOrder;
 
-    @ManyToOne
-    @JoinColumn(name = "product_id")
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(referencedColumnName = "product_id", name = "product_id",insertable = false,updatable = false)
     private Product product;
 
     private double amount ;

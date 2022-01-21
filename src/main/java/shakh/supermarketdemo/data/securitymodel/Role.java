@@ -9,14 +9,14 @@ import java.util.Collection;
 
 @Entity
 @Data
-
 public class Role
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
 
+    @JsonBackReference
     @ManyToMany(mappedBy = "roles")
     Collection<Admins> admins = new ArrayList<>();
 

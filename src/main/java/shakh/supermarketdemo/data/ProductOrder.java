@@ -3,9 +3,7 @@ package shakh.supermarketdemo.data;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.Cascade;
 import shakh.supermarketdemo.data.securitymodel.Admins;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
@@ -17,7 +15,8 @@ import java.util.List;
 public class ProductOrder
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_order_id")
     private long id;
 
     private double paidCost;
@@ -29,15 +28,17 @@ public class ProductOrder
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
     List<OrderItem> orderItems = new ArrayList<>();
 
-    @ManyToOne()
-    @JoinColumn(name = "debitor_id")
+    @ManyToOne(cascade = CascadeType.PERSIST,targetEntity = Debitors.class)
+    @JoinColumn(referencedColumnName = "debitors_id", name = "debitors_id",insertable = false,updatable = false)
     private Debitors debitors;
+
+    private boolean isActive = true ;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
     private List<Payment> payment=  new ArrayList<>();
 
     @JsonBackReference
-    @ManyToOne()
-    @JoinColumn(name = "admin_id")
+    @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Admins.class)
+    @JoinColumn(name = "admins_id",referencedColumnName = "admins_id",insertable = false,updatable = false)
     private Admins admins;
 }

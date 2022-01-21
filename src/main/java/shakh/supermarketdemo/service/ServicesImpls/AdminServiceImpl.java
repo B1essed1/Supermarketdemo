@@ -6,10 +6,16 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;*/
+import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
+import shakh.supermarketdemo.data.ProductOrder;
 import shakh.supermarketdemo.data.securitymodel.Admins;
 import shakh.supermarketdemo.repository.AdminRepository;
 import shakh.supermarketdemo.service.AdminService;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class AdminServiceImpl implements AdminService /*, UserDetailsService */{
@@ -47,6 +53,31 @@ public class AdminServiceImpl implements AdminService /*, UserDetailsService */{
     @Override
     public void delete(Long id) {
          adminRepository.deleteById(id);
+    }
+
+    @Override
+    public Admins getAdminsByOrder(ProductOrder order)
+    {
+        Admins admins =adminRepository.findAdminsByOrders(order);
+        if (admins == null) throw new RuntimeException("Admin Not Found");
+           else
+               return admins;
+    }
+
+    @Override
+    public Admins getAdminById(Long id)  {
+        Optional<Admins> admins = adminRepository.findById(id);
+
+        if (admins.isEmpty()) throw new RuntimeException("bu Id boyicha Admin mavjud emas ");
+        else return admins.get();
+    }
+
+    @Override
+    public List<Admins> getAllAdmins() {
+       List<Admins> admins = new ArrayList<>();
+       adminRepository.findAll().forEach(admins::add);
+       if (admins.isEmpty()) throw new RuntimeException("adminlar qoshilmagan , iltimos yangi admin qoshing ");
+        else return admins;
     }
 }
 

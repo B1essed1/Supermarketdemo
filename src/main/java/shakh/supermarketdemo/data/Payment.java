@@ -12,18 +12,23 @@ import java.util.Date;
 public class Payment
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    @JoinColumn(name= "debitor_id")
-    private Debitors debitors;
+
+    private boolean isActive = true ;
 
     private double amount;
 
-    @ManyToOne
-    @JoinColumn(name = "order_id")
+    private Date createdTime;
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "debitors_id", referencedColumnName = "debitors_id",insertable = false,updatable = false)
+    private Debitors debitors;
+
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "product_order_id",referencedColumnName = "product_order_id",insertable = false,updatable = false)
     private ProductOrder productOrder;
 
-    private Date createdTime;
 }

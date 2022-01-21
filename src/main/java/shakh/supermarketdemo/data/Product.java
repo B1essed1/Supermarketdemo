@@ -22,8 +22,8 @@ import java.util.*;
 public class Product
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private long id ;
 
 
@@ -31,28 +31,20 @@ public class Product
     private int barcode;
 
     @Size(min = 5, message = "kamida 5 ta belgidan tashkil topgan bo'lishi kerak !")
-    @Column(name = "product_name")
     private String productName ;
 
-    @Column(name = "price_of_sell")
     private double priceOfSell;
-
-    @Column(name ="price_of_buy")
     private double priceOfBuy;
 
-    @Column(name = "measure_type")
     private boolean measureType;
 
+    private boolean isActive = true ;
 
-    @Column(name = "quantity")
     @PositiveOrZero(message = "qiymat doim noldan katta bo'lishi kerak")
     private double quantity;
 
-
-    @Column(name = "created_time")
     private LocalDateTime createdTime;
 
-    @Column(name = "last_updated_time")
     private LocalDateTime lastUpdatedTime;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")

@@ -22,11 +22,11 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(Long id)
     {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        if (optionalProduct.isEmpty())
+        /*if (optionalProduct.isEmpty())
         {
-            throw new RuntimeException("ID Not Found");
+            throw new RuntimeException(" Already deleted ");
         }
-        else
+        else*/
             return productRepository.findById(id).get();
     }
 
@@ -35,6 +35,24 @@ public class ProductServiceImpl implements ProductService {
         LocalDateTime currentTime  = LocalDateTime.now();
         product.setCreatedTime(currentTime);
         return productRepository.save(product);
+    }
+
+    @Override
+    public void hardDeleteProductById(Long id) {
+        productRepository.deleteById(id);
+    }
+
+    @Override
+    public void softDeleteProductById(Long id) {
+
+    }
+
+    @Override
+    public Boolean checkProductByBarcode(int barcode) {
+
+        if (productRepository.getProductByBarcode(barcode) != null)
+            return true;
+        else return  false ;
     }
 
 
@@ -80,12 +98,11 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(Long id)
     {
 
-        Optional<Product> product = productRepository.findProductById(id);
+        Optional<Product> product = productRepository.findById(id);
 
-        if (product.isPresent())
-        {
+        if (product.isPresent()) {
             return product.get();
-        } else throw new ProductNotFoundException("######### Get productById is not working");
+        } else throw new ProductNotFoundException(" Get productById is not working");
     }
 
 }

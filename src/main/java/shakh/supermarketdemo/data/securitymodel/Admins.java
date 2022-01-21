@@ -15,12 +15,15 @@ import java.util.List;
 public class Admins
 {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "admins_id")
     private Long id;
     private String username;
     private String password;
 
-    @OneToMany(mappedBy ="admins" ,orphanRemoval = true,cascade = CascadeType.ALL)
+    private boolean isActive = true ;
+
+    @OneToMany(mappedBy = "admins",orphanRemoval = true,cascade = CascadeType.ALL)
     List<ProductOrder> orders = new ArrayList<>();
 
     @ManyToMany(cascade = {
