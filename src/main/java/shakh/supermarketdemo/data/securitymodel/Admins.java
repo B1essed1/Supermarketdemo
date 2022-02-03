@@ -1,5 +1,6 @@
 package shakh.supermarketdemo.data.securitymodel;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import shakh.supermarketdemo.data.ProductOrder;
@@ -16,7 +17,6 @@ public class Admins
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "admins_id")
     private Long id;
     private String username;
     private String password;

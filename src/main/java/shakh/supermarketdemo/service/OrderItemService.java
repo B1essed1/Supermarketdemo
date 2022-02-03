@@ -9,4 +9,5 @@ public interface OrderItemService
 {
     List<OrderItem> getByProductOrder(ProductOrder order);
     OrderItem save(OrderItem orderItem);
+    List<OrderItem> getByProductOrderId(Long id);
 }

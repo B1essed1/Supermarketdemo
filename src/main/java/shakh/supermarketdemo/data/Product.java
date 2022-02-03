@@ -18,12 +18,10 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "product")
 public class Product
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_id")
     private long id ;
 
 
@@ -48,11 +46,9 @@ public class Product
     private LocalDateTime lastUpdatedTime;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
-    @JsonManagedReference
     private Set<Unload> unload= new HashSet<>();
 
     @OneToMany(cascade =CascadeType.ALL ,mappedBy = "product" )
     private List<OrderItem> orderItemSet = new ArrayList<>();
-
 
 }

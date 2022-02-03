@@ -8,6 +8,7 @@ import shakh.supermarketdemo.service.ProductOrderService;
 import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductOrderServiceImpl implements ProductOrderService
@@ -32,5 +33,11 @@ public class ProductOrderServiceImpl implements ProductOrderService
         ProductOrder productOrder = productOrderRepository.save(order);
         return productOrder;
 
+    }
+
+    @Override
+    public Optional<ProductOrder> getById(Long id) {
+
+        return productOrderRepository.findById(id);
     }
 }

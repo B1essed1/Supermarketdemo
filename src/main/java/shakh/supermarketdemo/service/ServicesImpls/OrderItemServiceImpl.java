@@ -17,6 +17,7 @@ public class OrderItemServiceImpl implements OrderItemService {
         this.orderItemRepository = orderItemRepository;
     }
 
+
     @Override
     public List<OrderItem> getByProductOrder(ProductOrder order)
     {
@@ -28,5 +29,10 @@ public class OrderItemServiceImpl implements OrderItemService {
     public OrderItem save(OrderItem orderItem)
     {
         return orderItemRepository.save(orderItem);
+    }
+
+    @Override
+    public List<OrderItem> getByProductOrderId(Long id) {
+        return orderItemRepository.findByProductOrderId(id);
     }
 }

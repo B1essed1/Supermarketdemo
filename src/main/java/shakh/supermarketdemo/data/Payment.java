@@ -1,5 +1,6 @@
 package shakh.supermarketdemo.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,12 +24,12 @@ public class Payment
     private Date createdTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "debitors_id", referencedColumnName = "debitors_id",insertable = false,updatable = false)
+    @JoinColumn(name = "debitors_id",nullable = true)
     private Debitors debitors;
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "product_order_id",referencedColumnName = "product_order_id",insertable = false,updatable = false)
+    @JoinColumn(name = "product_order_id",nullable = true)
     private ProductOrder productOrder;
 
 }

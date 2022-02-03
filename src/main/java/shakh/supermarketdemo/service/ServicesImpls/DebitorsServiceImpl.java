@@ -3,6 +3,8 @@ package shakh.supermarketdemo.service.ServicesImpls;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.Debitors;
+import shakh.supermarketdemo.data.OrderItem;
+import shakh.supermarketdemo.dto.ProductOrderDto;
 import shakh.supermarketdemo.repository.DebitorsRepository;
 import shakh.supermarketdemo.service.DebitorService;
 

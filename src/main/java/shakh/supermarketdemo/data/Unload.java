@@ -27,7 +27,6 @@ public class Unload
     private LocalDateTime createdTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JsonBackReference
-    @JoinColumn(name = "product_id" , referencedColumnName = "product_id",insertable = false,updatable = false)
+    @JoinColumn(name = "product_id" ,nullable = true)
     private Product product;
 }

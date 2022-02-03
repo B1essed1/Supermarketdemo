@@ -1,5 +1,6 @@
 package shakh.supermarketdemo.data;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,11 +21,12 @@ public class OrderItem
     private double priceOfSell;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(referencedColumnName = "product_order_id",name="product_order_id",insertable = false,updatable = false)
+    @JoinColumn(name="product_order_id", nullable = true)
+    @JsonBackReference
     private ProductOrder productOrder;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(referencedColumnName = "product_id", name = "product_id",insertable = false,updatable = false)
+    @JoinColumn( name = "product_id", nullable = true)
     private Product product;
 
     private double amount ;

@@ -1,6 +1,7 @@
 package shakh.supermarketdemo.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import shakh.supermarketdemo.data.securitymodel.Admins;
@@ -16,29 +17,28 @@ public class ProductOrder
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "product_order_id")
-    private long id;
+    private Long id;
 
-    private double paidCost;
+    private Double paidCost;
 
-    private double totalCost;
+    private Double totalCost;
 
     private Date createdTime;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
+    @JsonManagedReference
     List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST,targetEntity = Debitors.class)
-    @JoinColumn(referencedColumnName = "debitors_id", name = "debitors_id",insertable = false,updatable = false)
+    @JoinColumn( name = "debitors_id",nullable = true)
     private Debitors debitors;
 
-    private boolean isActive = true ;
+    private Boolean isActive = true ;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
     private List<Payment> payment=  new ArrayList<>();
 
-    @JsonBackReference
     @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Admins.class)
-    @JoinColumn(name = "admins_id",referencedColumnName = "admins_id",insertable = false,updatable = false)
+    @JoinColumn(name = "admins_id",nullable = true)
     private Admins admins;
 }

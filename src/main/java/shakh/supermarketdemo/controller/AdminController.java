@@ -24,11 +24,11 @@ public class AdminController
     }
 
 
-    @PostMapping("login")
-    public ResponseEntity<Admins> addingNewSeller(@RequestBody Admins admin) throws NotFoundException {
+    @PostMapping(value = "login")
+    public ResponseEntity<Admins> addingNewSeller(@RequestBody Admins admin)  {
 
         Admins admins= adminService.save(admin);
-        if (admins == null) throw  new NotFoundException("Could Not SAve Admin");
+        if (admins == null) throw  new RuntimeException("Could Not SAve Admin");
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

@@ -1,5 +1,6 @@
 package shakh.supermarketdemo.data;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Proxy;
@@ -12,15 +13,14 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Proxy(lazy = false)
+@Proxy(lazy = false  )
 public class Debitors
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "debitors_id")
     private long id ;
 
-    //@Min(value = 10 , message = " min fullName value is 10 ")
+    //@Min(value = 10, message = " min fullName value is 10 ")
     private String fullName;
 
     private boolean isActive = true ;
