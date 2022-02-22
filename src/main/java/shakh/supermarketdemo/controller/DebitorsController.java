@@ -1,6 +1,5 @@
 package shakh.supermarketdemo.controller;
 
-import javassist.NotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -21,7 +20,7 @@ public class DebitorsController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<Debitors> addDebitors(@RequestBody Debitors debitors){
+    public ResponseEntity<Debitors> addDebitors(@RequestBody Debitors debitors) {
         Debitors debitor = debitorService.save(debitors);
         if (debitors == null) throw new RuntimeException("cannot save debitors");
 
@@ -33,15 +32,14 @@ public class DebitorsController {
     }
 
     @GetMapping("get/{id}")
-    public ResponseEntity<Debitors> getDebitorsById(@PathVariable("id") Long id){
+    public ResponseEntity<Debitors> getDebitorsById(@PathVariable("id") Long id) {
         Debitors debitor = debitorService.getDebitorById(id);
         return ResponseEntity.ok(debitor);
     }
 
     @GetMapping("get/all")
-    public ResponseEntity<List<Debitors>> getAllDebitors(){
+    public ResponseEntity<List<Debitors>> getAllDebitors() {
         List<Debitors> debitors = debitorService.getAllDebitors();
-
         return ResponseEntity.ok(debitors);
     }
 }

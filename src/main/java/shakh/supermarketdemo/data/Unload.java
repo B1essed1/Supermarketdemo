@@ -3,30 +3,32 @@ package shakh.supermarketdemo.data;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.Setter;
-import javax.persistence.*;
-import java.time.LocalDateTime;
 
+import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
 @Getter
 @Setter
-public class Unload
-{
+public class Unload {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private double amount;
-    private double priceOfBuy;
-    private double priceOfSell;
+    private Double amount;
 
-    private boolean isActive = true ;
+    private Double priceOfBuy;
 
+    private Double priceOfSell;
 
-    private LocalDateTime createdTime;
+    private Boolean isActive = true;
+
+    private Date createdTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "product_id" ,nullable = true)
+    @JoinColumn(name = "product_id")
+    @JsonBackReference(value = "product-unload")
     private Product product;
 }

@@ -26,19 +26,23 @@ public class ProductOrder
     private Date createdTime;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
-    @JsonManagedReference
+    @JsonManagedReference(value = "order-item")
     List<OrderItem> orderItems = new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST,targetEntity = Debitors.class)
     @JoinColumn( name = "debitors_id",nullable = true)
+    @JsonBackReference(value = "debitor-order")
     private Debitors debitors;
 
     private Boolean isActive = true ;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "productOrder")
+    @JsonManagedReference(value = "order-payment")
     private List<Payment> payment=  new ArrayList<>();
 
     @ManyToOne(cascade = CascadeType.PERSIST, targetEntity = Admins.class)
     @JoinColumn(name = "admins_id",nullable = true)
+    @JsonBackReference(value = "admin-order")
     private Admins admins;
+
 }

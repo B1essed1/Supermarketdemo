@@ -10,4 +10,5 @@ public interface ProductOrderService
     List<ProductOrder> getAllOrders();
     ProductOrder save(ProductOrder order);
     Optional<ProductOrder> getById(Long id);
+    List<ProductOrder> getUnpaidOrdersByDebitors(Long id);
 }

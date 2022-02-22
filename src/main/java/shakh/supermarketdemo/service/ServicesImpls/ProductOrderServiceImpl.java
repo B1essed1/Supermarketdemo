@@ -40,4 +40,12 @@ public class ProductOrderServiceImpl implements ProductOrderService
 
         return productOrderRepository.findById(id);
     }
+
+    @Override
+    public List<ProductOrder> getUnpaidOrdersByDebitors(Long id) {
+
+        List<ProductOrder> unpaidOrders = productOrderRepository.getProductOrdersByDebitorsId(id);
+
+        return unpaidOrders;
+    }
 }

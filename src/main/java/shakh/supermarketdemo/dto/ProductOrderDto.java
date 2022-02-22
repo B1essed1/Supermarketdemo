@@ -19,7 +19,6 @@ import java.util.List;
 @NoArgsConstructor
 public class ProductOrderDto {
 
-
     private Long id;
 
     private Double paidCost;
@@ -31,15 +30,19 @@ public class ProductOrderDto {
     private Date createdTime;
 
     List<OrderItem> orderItems = new ArrayList<>();
-
     private Long debitorId;
+
     private String debitorFullName;
 
     private Boolean isActive;
+
     private List<Payment> payment = new ArrayList<>();
 
     private Long adminId;
+
     private String adminUsername;
+
+    private Double paymentAmount;
 
     public ProductOrderDto(ProductOrder productOrder, List<OrderItem> orderItems) {
         if (productOrder.getId() != null) {
@@ -68,12 +71,15 @@ public class ProductOrderDto {
     }
 
     public ProductOrder convertToProductOrder(ProductOrder productOrder, DebitorService debitorService, AdminService adminService) {
+        Date now = new Date();
+
+
         if (id != null) {
             productOrder.setId(id);
         }
         productOrder.setPaidCost(paidCost);
         productOrder.setTotalCost(totalCost);
-        productOrder.setCreatedTime(createdTime);
+        productOrder.setCreatedTime(now);
 
         if (debitorId != null) {
             Debitors debitors = debitorService.getDebitorById(debitorId);
@@ -83,6 +89,7 @@ public class ProductOrderDto {
             Admins admins = adminService.getAdminById(adminId);
             productOrder.setAdmins(admins);
         }
+
         return productOrder;
     }
 }

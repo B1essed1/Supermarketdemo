@@ -19,8 +19,6 @@ public class UnlaodServiceImpl implements UnloadService
     @Override
     public Unload save(Unload unload)
     {
-        LocalDateTime createdTime = LocalDateTime.now();
-        unload.setCreatedTime(createdTime);
         return unloadRepository.save(unload);
     }
 

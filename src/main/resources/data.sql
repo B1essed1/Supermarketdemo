@@ -1,72 +1,142 @@
-/*
-drop table if exists PRODUCT;
-CREATE TABLE PRODUCT (
-                              id INT AUTO_INCREMENT  PRIMARY KEY,
-                              barcode INT,
-                              product_name VARCHAR(250) NOT NULL,
-                              price_of_sell double not null ,
-                              measure_type boolean,
-                              quantity double not null ,
-                              created_time date not null ,
-                              last_updated_time date not null,
-                     price_of_buy double not  null
-
-
-
-);
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (1,1235,'cola' ,10000.0,true,25.0,'2020-02-03','2021-02-03',8000.0);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (2,2235,'Fanta' ,10000.0,true,25.0,'2020-02-03','2021-02-03',7000);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time, price_of_buy)
-VALUES (3,3235,'Adrenalin' ,12000.0,true,25.0,'2020-02-03','2021-02-03',10000);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (4,4235,'Flash' ,8000.0,true,25.0,'2020-02-03','2021-02-03',6900);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (5,5235,'Monster' ,9000.0,true,25.0,'2020-02-03','2021-02-03',7100);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (6,6235,'Jaguar' ,12000.0,true,25.0,'2020-02-03','2021-02-03');
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (7,7235,'Guava' ,8000.0,true,25.0,'2020-02-03','2021-02-03',6800);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (8,8235,'Meva sok' ,9000.0,true,25.0,'2020-02-03','2021-02-03',7300);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (9,9235,'bliss' ,11000.0,true,25.0,'2020-02-03','2021-02-03',9400);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (10,5335,'Montella 0.5' ,2000.0,true,25.0,'2020-02-03','2021-02-03',1700);
-
-
-INSERT INTO PRODUCT(id, barcode, product_name, price_of_sell, measure_type, quantity, created_time, last_updated_time,price_of_buy)
-VALUES (11,6535,'hydrolife 1l' ,3000.0,true,25.0,'2020-02-03','2021-02-03',2500);
-
-*//*
-
-
-create table unload(
-    id long not null auto_increment ,
-    amount double not null ,
-    price_of_buy double not null ,
-    created_time date not null
-);
-
-INSERT INTO unload (id,amount,price_of_buy,created_time) values ( 1, 50 , 1000.0 ,'2020-02-04' );
-*/
+[
+    {
+        "id": 2,
+        "totalCost": 100000.0,
+        "paidCost": 5000.0,
+        "createdTime": "2022-02-06T11:05:07.799+00:00",
+        "orderItems": [
+            {
+                "id": 4,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 5,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 6,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 5.0
+            }
+        ],
+        "unpaidProductOrders": [],
+        "orders": []
+    },
+    {
+        "id": 3,
+        "totalCost": 100000.0,
+        "paidCost": 50000.0,
+        "createdTime": "2022-02-06T11:05:13.975+00:00",
+        "orderItems": [
+            {
+                "id": 7,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 8,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 9,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 5.0
+            }
+        ],
+        "unpaidProductOrders": [],
+        "orders": []
+    },
+    {
+        "id": 8,
+        "totalCost": 100000.0,
+        "paidCost": 5000.0,
+        "createdTime": "2022-02-06T13:02:15.547+00:00",
+        "orderItems": [
+            {
+                "id": 22,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 23,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 24,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 5.0
+            }
+        ],
+        "unpaidProductOrders": [],
+        "orders": []
+    },
+    {
+        "id": 7,
+        "totalCost": 100000.0,
+        "paidCost": 80000.0,
+        "createdTime": "2022-02-06T13:01:54.253+00:00",
+        "orderItems": [
+            {
+                "id": 19,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 20,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 21,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 5.0
+            }
+        ],
+        "unpaidProductOrders": [],
+        "orders": []
+    },
+    {
+        "id": 9,
+        "totalCost": 100000.0,
+        "paidCost": 30000.0,
+        "createdTime": "2022-02-06T13:02:22.148+00:00",
+        "orderItems": [
+            {
+                "id": 25,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 26,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 2.0
+            },
+            {
+                "id": 27,
+                "productName": "pep  0.5l  ",
+                "priceOfSell": 9000.0,
+                "amount": 5.0
+            }
+        ],
+        "unpaidProductOrders": [],
+        "orders": []
+    }
+]

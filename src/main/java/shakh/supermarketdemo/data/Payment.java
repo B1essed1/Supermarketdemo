@@ -14,22 +14,24 @@ public class Payment
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
 
-    private boolean isActive = true ;
+    private Boolean isActive = true ;
 
-    private double amount;
+    private Double totalPaidCost;
 
     private Date createdTime;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "debitors_id",nullable = true)
+    @JsonBackReference(value = "debitor-payment")
     private Debitors debitors;
 
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "product_order_id",nullable = true)
+    @JsonBackReference(value = "order-payment")
     private ProductOrder productOrder;
 
 }

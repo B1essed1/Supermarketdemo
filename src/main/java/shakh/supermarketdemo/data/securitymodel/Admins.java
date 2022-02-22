@@ -24,6 +24,7 @@ public class Admins
     private boolean isActive = true ;
 
     @OneToMany(mappedBy = "admins",orphanRemoval = true,cascade = CascadeType.ALL)
+            @JsonManagedReference(value = "admin-order")
     List<ProductOrder> orders = new ArrayList<>();
 
     @ManyToMany(cascade = {

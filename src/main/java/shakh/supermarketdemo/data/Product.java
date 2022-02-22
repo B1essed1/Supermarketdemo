@@ -22,33 +22,37 @@ public class Product
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
-
+    private Long id ;
 
     @Column(name = "barcode")
-    private int barcode;
+    private Integer barcode;
 
     @Size(min = 5, message = "kamida 5 ta belgidan tashkil topgan bo'lishi kerak !")
     private String productName ;
 
-    private double priceOfSell;
-    private double priceOfBuy;
+    private Double priceOfBuy;
 
-    private boolean measureType;
+    private Double priceOfSell;
 
-    private boolean isActive = true ;
+    private Boolean measureType;
+
+    private Boolean isActive = true ;
 
     @PositiveOrZero(message = "qiymat doim noldan katta bo'lishi kerak")
-    private double quantity;
+    private Double amount;
 
-    private LocalDateTime createdTime;
+    private Date createdTime;
 
-    private LocalDateTime lastUpdatedTime;
+
+
+    private Date lastUpdatedTime;
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    @JsonManagedReference(value = "product-unload")
     private Set<Unload> unload= new HashSet<>();
 
     @OneToMany(cascade =CascadeType.ALL ,mappedBy = "product" )
+    @JsonManagedReference(value = "product-item")
     private List<OrderItem> orderItemSet = new ArrayList<>();
 
 }

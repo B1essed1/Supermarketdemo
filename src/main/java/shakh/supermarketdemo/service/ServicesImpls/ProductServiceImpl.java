@@ -1,38 +1,33 @@
 package shakh.supermarketdemo.service.ServicesImpls;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.Product;
 import shakh.supermarketdemo.exceptions.ProductNotFoundException;
 import shakh.supermarketdemo.repository.ProductRepository;
 import shakh.supermarketdemo.service.ProductService;
 
-import java.time.LocalDateTime;
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ProductServiceImpl implements ProductService {
 
 
-    @Autowired
-    private ProductRepository productRepository;
+    private final ProductRepository productRepository;
+
+    public ProductServiceImpl(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
+
     @Override
     public Product findById(Long id)
     {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        /*if (optionalProduct.isEmpty())
-        {
-            throw new RuntimeException(" Already deleted ");
-        }
-        else*/
-            return productRepository.findById(id).get();
+            return optionalProduct.get();
     }
 
     @Override
     public Product save(Product product) {
-        LocalDateTime currentTime  = LocalDateTime.now();
+        Date currentTime  = new Date();
         product.setCreatedTime(currentTime);
         return productRepository.save(product);
     }
@@ -43,8 +38,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void softDeleteProductById(Long id) {
-
+    public List<Product> getProductByFewAndAlert() {
+        List<Product> products = productRepository.findProductsByAmount();
+        return products;
     }
 
     @Override
@@ -53,17 +49,6 @@ public class ProductServiceImpl implements ProductService {
         if (productRepository.getProductByBarcode(barcode) != null)
             return true;
         else return  false ;
-    }
-
-
-    @Override
-    public Set<Product> findBetweenLastWeak() {
-        return null;
-    }
-
-    @Override
-    public Set<Product> findByCount() {
-        return null;
     }
 
     @Override
@@ -86,13 +71,6 @@ public class ProductServiceImpl implements ProductService {
         return allProductsSet;
     }
 
-    @Override
-    public Product saveUpdate(Product product)
-    {
-        LocalDateTime updateTime  = LocalDateTime.now();
-        product.setLastUpdatedTime(updateTime);
-        return productRepository.save(product);
-    }
 
     @Override
     public Product getProductById(Long id)

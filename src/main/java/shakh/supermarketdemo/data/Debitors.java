@@ -18,19 +18,21 @@ public class Debitors
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id ;
+    private Long id ;
 
     //@Min(value = 10, message = " min fullName value is 10 ")
     private String fullName;
 
-    private boolean isActive = true ;
+    private Boolean isActive = true ;
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "debitors",cascade = CascadeType.ALL,orphanRemoval = true )
+    @OneToMany(mappedBy = "debitors",cascade = CascadeType.ALL )
+    @JsonManagedReference(value = "debitor-order")
     private List<ProductOrder> orderList = new ArrayList<>();
 
     @OneToMany(cascade = CascadeType.ALL,mappedBy = "debitors")
+    @JsonManagedReference(value = "debitor-payment")
     private List<Payment> payment =  new ArrayList<>();
 
 }

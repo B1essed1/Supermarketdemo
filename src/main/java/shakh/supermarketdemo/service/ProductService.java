@@ -2,7 +2,7 @@ package shakh.supermarketdemo.service;
 
 import shakh.supermarketdemo.data.Product;
 
-
+import java.util.List;
 import java.util.Set;
 
 public interface ProductService {
@@ -13,19 +13,13 @@ public interface ProductService {
 
     void hardDeleteProductById(Long id);
 
-    void softDeleteProductById(Long id);
+    List<Product> getProductByFewAndAlert();
+
     Boolean checkProductByBarcode(int barcode);
-
-
-    Set<Product> findBetweenLastWeak();
-
-    Set<Product> findByCount();
 
     Product findByBarcode(int barcode);
 
     Set<Product> getAllProduct();
-
-    Product saveUpdate(Product product);
 
     Product getProductById(Long id);
 }

@@ -1,6 +1,7 @@
 package shakh.supermarketdemo.data;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,23 +13,26 @@ public class OrderItem
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
-    private boolean isActive = true ;
+    private Boolean isActive = true ;
 
-    private double priceOfBuy;
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private Double priceOfBuy;
 
-    private double priceOfSell;
+    private Double priceOfSell;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="product_order_id", nullable = true)
-    @JsonBackReference
+    @JsonBackReference(value = "order-item")
     private ProductOrder productOrder;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn( name = "product_id", nullable = true)
+    @JoinColumn( name = "product_id")
+    @JsonBackReference(value = "product-item")
+    //@JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Product product;
 
-    private double amount ;
+    private Double amount ;
 
 }
