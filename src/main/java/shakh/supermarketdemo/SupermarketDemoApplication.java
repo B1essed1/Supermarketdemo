@@ -12,6 +12,4 @@ public class SupermarketDemoApplication {
     public static void main(String[] args){
         SpringApplication.run(SupermarketDemoApplication.class, args);
     }
-
-
 }

@@ -1,12 +1,11 @@
 
 package shakh.supermarketdemo.service.ServicesImpls;
-/*
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.password.PasswordEncoder;*/
-import javassist.NotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.ProductOrder;
 import shakh.supermarketdemo.data.securitymodel.Admins;
@@ -14,20 +13,22 @@ import shakh.supermarketdemo.repository.AdminRepository;
 import shakh.supermarketdemo.service.AdminService;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdminServiceImpl implements AdminService /*, UserDetailsService */{
+public class AdminServiceImpl implements AdminService /*, UserDetailsService*/ {
 
    private final AdminRepository adminRepository;
+   /*private final PasswordEncoder passwordEncoder;*/
 
-    public AdminServiceImpl(AdminRepository adminRepository) {
+    public AdminServiceImpl(AdminRepository adminRepository/*, PasswordEncoder passwordEncoder*/) {
         this.adminRepository = adminRepository;
 
+/*        this.passwordEncoder = passwordEncoder;*/
     }
-/*
-    @Override
+   /* @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         Admins user = adminRepository.findByUsername(s);
 
@@ -41,12 +42,12 @@ public class AdminServiceImpl implements AdminService /*, UserDetailsService */{
 
         return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authorities);
 
-    }
+    }*/
 
-   */ @Override
+    @Override
     public Admins save(Admins admins)
     {
-        //admins.setPassword(passwordEncoder.encode(admins.getPassword()));
+       // admins.setPassword(passwordEncoder.encode(admins.getPassword()));
         return adminRepository.save(admins);
     }
 

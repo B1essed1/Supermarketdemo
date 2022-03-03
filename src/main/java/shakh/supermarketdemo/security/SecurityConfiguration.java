@@ -2,6 +2,7 @@
 package shakh.supermarketdemo.security;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,11 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
-import javax.servlet.Filter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -25,7 +22,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 
      private final UserDetailsService userDetailsService;
 
-    public SecurityConfiguration(UserDetailsService userDetailsService) {
+    public SecurityConfiguration(@Lazy UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
 
     }
@@ -46,10 +43,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
         http.authorizeRequests()
                 .antMatchers("/api/admin/").hasRole("ADMIN")
                 .antMatchers("/api/user/").hasAnyRole("ADMIN","USER")
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login","/api/admins/login").permitAll()
                 .anyRequest().authenticated();
-        http.addFilter((Filter) new CustomAuthenticationFilter(authenticationManagerBean()));
-        http.addFilterBefore(new CustomAuthorithationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
+        http.addFilterBefore(new CustomAuthorisationFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 
@@ -61,11 +58,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 
 
     @Bean
-    public PasswordEncoder getPasswordEncoder()
-    {
-        return NoOpPasswordEncoder.getInstance();
+    public BCryptPasswordEncoder passwordEncoder(){
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        return bCryptPasswordEncoder;
     }
-
 
 
 

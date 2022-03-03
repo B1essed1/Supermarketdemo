@@ -6,7 +6,6 @@ import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.el.stream.Stream;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,7 +27,7 @@ import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.FORBIDDEN;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
-public class CustomAuthorithationFilter extends OncePerRequestFilter {
+public class CustomAuthorisationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         if (request.getServletPath().equals("/login") || request.getServletPath().equals("/api/refresh/token") )
@@ -40,6 +39,7 @@ public class CustomAuthorithationFilter extends OncePerRequestFilter {
         if (authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
         {
            try {
+
                String token = authorizationHeader.substring("Bearer ".length());
                Algorithm algorithm = Algorithm.HMAC256("blessed1".getBytes());
                JWTVerifier verifier = JWT.require(algorithm).build();
@@ -64,7 +64,9 @@ public class CustomAuthorithationFilter extends OncePerRequestFilter {
                error.put("error_message" ,exception.getMessage());
                new ObjectMapper().writeValue(response.getOutputStream(),error);
            }
-        }else { filterChain.doFilter(request,response);}
+        }else {
+            filterChain.doFilter(request,response);
+        }
     }
 }
 */
