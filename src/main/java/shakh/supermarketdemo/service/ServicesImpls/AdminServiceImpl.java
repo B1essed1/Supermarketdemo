@@ -1,7 +1,10 @@
 
 package shakh.supermarketdemo.service.ServicesImpls;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -18,36 +21,35 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class AdminServiceImpl implements AdminService /*, UserDetailsService*/ {
+@RequiredArgsConstructor
+@Slf4j
+public class AdminServiceImpl implements AdminService , UserDetailsService {
 
-   private final AdminRepository adminRepository;
-   /*private final PasswordEncoder passwordEncoder;*/
+    private final AdminRepository adminRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public AdminServiceImpl(AdminRepository adminRepository/*, PasswordEncoder passwordEncoder*/) {
-        this.adminRepository = adminRepository;
 
-/*        this.passwordEncoder = passwordEncoder;*/
-    }
-   /* @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        Admins user = adminRepository.findByUsername(s);
-
-        if (user == null) throw new UsernameNotFoundException("User Not Found In Database");
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Admins admin = adminRepository.findByUsername(username);
+        if(admin  == null) {
+            log.error("Admin not  found in database");
+            throw new UsernameNotFoundException("Admin not found in Db");
+        } else {
+            log.info("user found in database {}" , admin);
+        }
 
         Collection<SimpleGrantedAuthority> authorities = new ArrayList<>();
 
-        user.getRoles().forEach(role -> {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        });
+        admin.getRoles().forEach(role -> authorities.add(new SimpleGrantedAuthority(role.getName())));
 
-        return new org.springframework.security.core.userdetails.User(user.getUsername(),user.getPassword(),authorities);
-
-    }*/
+        return new User(admin.getUsername(), admin.getPassword(), authorities);
+    }
 
     @Override
     public Admins save(Admins admins)
     {
-       // admins.setPassword(passwordEncoder.encode(admins.getPassword()));
+        admins.setPassword(passwordEncoder.encode(admins.getPassword()));
         return adminRepository.save(admins);
     }
 

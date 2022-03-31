@@ -1,5 +1,4 @@
 package shakh.supermarketdemo.configurations;
-
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,15 +10,11 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
 
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-
 import static java.util.Collections.singletonList;
 import static shakh.supermarketdemo.utils.Swagger.*;
-import static shakh.supermarketdemo.utils.Swagger.SECURE_PATH;
-
 
 @Configuration
  class SwaggerConfig {
@@ -29,9 +24,9 @@ import static shakh.supermarketdemo.utils.Swagger.SECURE_PATH;
         return new Docket(DocumentationType.SWAGGER_2).apiInfo(apiInfo()).forCodeGeneration(true)
                 .securityContexts(singletonList(securityContext()))
                 .securitySchemes(singletonList(apiKey())).select()
-                .apis(RequestHandlerSelectors.any())
-                .paths(PathSelectors.regex(SECURE_PATH)).build()
-                .tags(new Tag(API_TAG, "All APIs relatin to this ptojects"));
+                .apis(RequestHandlerSelectors.withClassAnnotation(RestController.class))
+                .paths(PathSelectors.any()).build()
+                .tags(new Tag(API_TAG, "All APIs relating to this projects"));
 
     }
 
