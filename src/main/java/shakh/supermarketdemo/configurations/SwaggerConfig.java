@@ -9,6 +9,7 @@ import springfox.documentation.service.*;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spi.service.contexts.SecurityContext;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,6 +18,7 @@ import static java.util.Collections.singletonList;
 import static shakh.supermarketdemo.utils.Swagger.*;
 
 @Configuration
+@EnableSwagger2
  class SwaggerConfig {
 
     @Bean
@@ -31,7 +33,8 @@ import static shakh.supermarketdemo.utils.Swagger.*;
     }
 
     private ApiInfo apiInfo(){
-        return new ApiInfo(API_TITLE, API_DESCRIPTION,API_VERSION, TERMS_OF_SERVICE,contact(),LICENSE,LICENSE_URL, Collections.emptyList());
+        return new ApiInfo(API_TITLE, API_DESCRIPTION,API_VERSION, TERMS_OF_SERVICE,
+                contact(),LICENSE,LICENSE_URL, Collections.emptyList());
     }
 
     private Contact contact(){
@@ -39,7 +42,8 @@ import static shakh.supermarketdemo.utils.Swagger.*;
     }
 
     private ApiKey apiKey(){
-        return new ApiKey(SECURITY_REFERENCE,AUTHORIZATION, SecurityScheme.In.HEADER.name());
+        return new ApiKey(SECURITY_REFERENCE,AUTHORIZATION,
+                SecurityScheme.In.HEADER.name());
     }
 
     private SecurityContext securityContext(){

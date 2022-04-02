@@ -11,6 +11,7 @@ public interface AdminService
     Admins save(Admins admins);
     void delete(Long id);
     Admins getAdminsByOrder(ProductOrder order);
+    Admins getAdminByUsername(String name);
     Admins getAdminById(Long id) ;
     List<Admins> getAllAdmins();
 }

@@ -68,6 +68,11 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
     }
 
     @Override
+    public Admins getAdminByUsername(String name) {
+        return adminRepository.findByUsername(name);
+    }
+
+    @Override
     public Admins getAdminById(Long id)  {
         Optional<Admins> admins = adminRepository.findById(id);
 
