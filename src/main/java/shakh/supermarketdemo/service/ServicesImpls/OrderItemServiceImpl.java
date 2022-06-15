@@ -3,6 +3,7 @@ package shakh.supermarketdemo.service.ServicesImpls;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.OrderItem;
 import shakh.supermarketdemo.data.ProductOrder;
+import shakh.supermarketdemo.dto.OrderedItemsDto;
 import shakh.supermarketdemo.repository.OrderItemRepository;
 import shakh.supermarketdemo.service.OrderItemService;
 
@@ -35,4 +36,12 @@ public class OrderItemServiceImpl implements OrderItemService {
     public List<OrderItem> getByProductOrderId(Long id) {
         return orderItemRepository.findByProductOrderId(id);
     }
+
+    @Override
+    public List<OrderedItemsDto> getOrderItemByProductOrderId(Long id) {
+        List<OrderedItemsDto> orderedItems = orderItemRepository.findOrderItemsByProductOrderId(id);
+        return orderedItems;
+    }
+
+
 }

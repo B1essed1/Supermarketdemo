@@ -1,6 +1,6 @@
 package shakh.supermarketdemo.utils;
 
-public class Swagger {
+public class SwaggerConstants {
     public static final String  SECURITY_REFERENCE ="Token Access";
     public static final String  AUTHORIZATION_DESCRIPTION ="Full API permission";
     public static final String  AUTHORIZATION_SCOPE ="Unlimited";
@@ -14,6 +14,6 @@ public class Swagger {
     public static final String  LICENSE_URL ="MIT licence site";
     public static final String  SECURE_PATH ="/*/.*";
     public static final String  API_TAG = "Supermarket billing system ";
-    public static final String  CONTACT_URL = "@b1essed1";
+    public static final String  CONTACT_URL = "https:/t.me/b1essed1";
     public static final String  AUTHORIZATION = "Authorization";
 }

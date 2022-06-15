@@ -8,31 +8,37 @@ import org.hibernate.annotations.Proxy;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-@Proxy(lazy = false  )
-public class Debitors
-{
+@Proxy(lazy = false)
+public class Debitors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
     //@Min(value = 10, message = " min fullName value is 10 ")
-    private String fullName;
+    private String firstName;
 
-    private Boolean isActive = true ;
+    private String lastName;
+
+    private String additionalDetails;
+
+    private Boolean isActive = true;
 
     private String phoneNumber;
 
-    @OneToMany(mappedBy = "debitors",cascade = CascadeType.ALL )
+    private Date createdDate;
+
+    @OneToMany(mappedBy = "debitors", cascade = CascadeType.ALL)
     @JsonManagedReference(value = "debitor-order")
     private List<ProductOrder> orderList = new ArrayList<>();
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "debitors")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "debitors")
     @JsonManagedReference(value = "debitor-payment")
-    private List<Payment> payment =  new ArrayList<>();
+    private List<Payment> payment = new ArrayList<>();
 
 }

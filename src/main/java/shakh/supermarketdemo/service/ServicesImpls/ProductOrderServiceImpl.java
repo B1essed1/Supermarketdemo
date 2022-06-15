@@ -1,8 +1,12 @@
 package shakh.supermarketdemo.service.ServicesImpls;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.ProductOrder;
+import shakh.supermarketdemo.dto.OrderDto;
+import shakh.supermarketdemo.dto.OrderedItemsDto;
 import shakh.supermarketdemo.repository.ProductOrderRepository;
+import shakh.supermarketdemo.service.OrderItemService;
 import shakh.supermarketdemo.service.ProductOrderService;
 
 import javax.transaction.Transactional;
@@ -14,9 +18,11 @@ import java.util.Optional;
 public class ProductOrderServiceImpl implements ProductOrderService
 {
      private  final ProductOrderRepository productOrderRepository;
+     private final OrderItemService orderItemService;
 
-    public ProductOrderServiceImpl(ProductOrderRepository productOrderRepository) {
+    public ProductOrderServiceImpl(ProductOrderRepository productOrderRepository, OrderItemService orderItemService) {
         this.productOrderRepository = productOrderRepository;
+        this.orderItemService = orderItemService;
     }
 
     @Override
@@ -36,9 +42,11 @@ public class ProductOrderServiceImpl implements ProductOrderService
     }
 
     @Override
-    public Optional<ProductOrder> getById(Long id) {
-
-        return productOrderRepository.findById(id);
+    public OrderDto getById(Long id) {
+       OrderDto order = productOrderRepository.getProductOrderById(id, PageRequest.of(0, 26));
+        List<OrderedItemsDto> orderItems = orderItemService.getOrderItemByProductOrderId(id);
+        order.setOrderedItems(orderItems);
+        return order;
     }
 
     @Override

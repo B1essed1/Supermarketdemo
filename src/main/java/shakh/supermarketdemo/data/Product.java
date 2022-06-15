@@ -1,6 +1,7 @@
 package shakh.supermarketdemo.data;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -18,17 +19,15 @@ import java.util.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Product
-{
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id ;
+    private Long id;
 
-    @Column(name = "barcode")
     private Integer barcode;
 
     @Size(min = 5, message = "kamida 5 ta belgidan tashkil topgan bo'lishi kerak !")
-    private String productName ;
+    private String productName;
 
     private Double priceOfBuy;
 
@@ -36,23 +35,26 @@ public class Product
 
     private Boolean measureType;
 
-    private Boolean isActive = true ;
+    private Boolean isActive = true;
 
     @PositiveOrZero(message = "qiymat doim noldan katta bo'lishi kerak")
     private Double amount;
 
     private Date createdTime;
 
-
-
     private Date lastUpdatedTime;
 
-    @OneToMany(cascade = CascadeType.ALL,mappedBy = "product")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference(value = "product-unload")
-    private Set<Unload> unload= new HashSet<>();
+    private Set<Unload> unload = new HashSet<>();
 
-    @OneToMany(cascade =CascadeType.ALL ,mappedBy = "product" )
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "product")
     @JsonManagedReference(value = "product-item")
     private List<OrderItem> orderItemSet = new ArrayList<>();
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "category_id")
+    private Category categories;
 
 }

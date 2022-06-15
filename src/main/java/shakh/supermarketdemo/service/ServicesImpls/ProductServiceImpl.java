@@ -2,6 +2,7 @@ package shakh.supermarketdemo.service.ServicesImpls;
 
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.Product;
+import shakh.supermarketdemo.dto.ProductVisualisationDto;
 import shakh.supermarketdemo.exceptions.ProductNotFoundException;
 import shakh.supermarketdemo.repository.ProductRepository;
 import shakh.supermarketdemo.service.ProductService;
@@ -38,8 +39,8 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByFewAndAlert() {
-        List<Product> products = productRepository.findProductsByAmount();
+    public List<ProductVisualisationDto> getProductByFewAndAlert() {
+        List<ProductVisualisationDto> products = productRepository.findProductsByAmount();
         return products;
     }
 
@@ -52,9 +53,9 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product findByBarcode(int barcode)
+    public ProductVisualisationDto findByBarcode(int barcode)
     {
-        Product product= productRepository.getProductByBarcode(barcode);
+        ProductVisualisationDto product= productRepository.getProductByBarcode(barcode);
         if (product== null)
         {
              throw new RuntimeException("not fond");
@@ -64,11 +65,10 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Set<Product> getAllProduct()
+    public List<ProductVisualisationDto> getAllProduct()
     {
-        Set<Product> allProductsSet = new HashSet<>();
-        productRepository.findAll().forEach(allProductsSet::add);
-        return allProductsSet;
+        List<ProductVisualisationDto> allProducts = productRepository.findAllProducts();
+        return allProducts;
     }
 
 

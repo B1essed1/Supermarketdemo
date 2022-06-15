@@ -9,6 +9,8 @@ import shakh.supermarketdemo.data.OrderItem;
 import shakh.supermarketdemo.data.Payment;
 import shakh.supermarketdemo.data.Product;
 import shakh.supermarketdemo.data.ProductOrder;
+import shakh.supermarketdemo.dto.OrderDto;
+import shakh.supermarketdemo.dto.OrderedItemsDto;
 import shakh.supermarketdemo.dto.ProductOrderDto;
 import shakh.supermarketdemo.dto.UnpaidOrdersDto;
 import shakh.supermarketdemo.service.*;
@@ -79,17 +81,15 @@ public class ProductOrderController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProductOrderDto> getById(@PathVariable("id") Long id) {
-
-        List<OrderItem> items = orderItemService.getByProductOrderId(id);
-        ProductOrder order = productOrderService.getById(id).get();
-        return ResponseEntity.ok(new ProductOrderDto(order, items));
+    public ResponseEntity<OrderDto> getById(@PathVariable("id") Long id) {
+        OrderDto orderDto =  productOrderService.getById(id);
+        return ResponseEntity.ok(orderDto);
     }
 
-    @GetMapping("unpaid/{id}")
-    public ResponseEntity<List<UnpaidOrdersDto>> getUnpaidOrders(@PathVariable("id") Long id) {
+    @GetMapping("unpaid")
+    public ResponseEntity<List<UnpaidOrdersDto>> getUnpaidOrders() {
 
-        List<ProductOrder> unpaidOrders = productOrderService.getUnpaidOrdersByDebitors(id);
+        //List<ProductOrder> unpaidOrders = productOrderService.getUnpaidOrders();
 
         return ResponseEntity.ok((new UnpaidOrdersDto(unpaidOrders)).getOrders());
     }

@@ -1,6 +1,7 @@
 
 package shakh.supermarketdemo.service.ServicesImpls;
 
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -11,22 +12,26 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import shakh.supermarketdemo.data.ProductOrder;
+import shakh.supermarketdemo.data.securitymodel.AdminReserve;
 import shakh.supermarketdemo.data.securitymodel.Admins;
+import shakh.supermarketdemo.data.securitymodel.Role;
+import shakh.supermarketdemo.dto.AdminRegDto;
+import shakh.supermarketdemo.dto.PersonVisualisationDto;
 import shakh.supermarketdemo.repository.AdminRepository;
 import shakh.supermarketdemo.service.AdminService;
+import shakh.supermarketdemo.service.RoleService;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
-@RequiredArgsConstructor
+@AllArgsConstructor
 @Slf4j
 public class AdminServiceImpl implements AdminService , UserDetailsService {
 
+
     private final AdminRepository adminRepository;
     private final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
 
     @Override
@@ -54,18 +59,10 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
     }
 
     @Override
-    public void delete(Long id) {
-         adminRepository.deleteById(id);
+    public Admins getAdminsByMail(String mail) {
+        return adminRepository.findByEmail(mail);
     }
 
-    @Override
-    public Admins getAdminsByOrder(ProductOrder order)
-    {
-        Admins admins =adminRepository.findAdminsByOrders(order);
-        if (admins == null) throw new RuntimeException("Admin Not Found");
-           else
-               return admins;
-    }
 
     @Override
     public Admins getAdminByUsername(String name) {
@@ -81,11 +78,37 @@ public class AdminServiceImpl implements AdminService , UserDetailsService {
     }
 
     @Override
-    public List<Admins> getAllAdmins() {
-       List<Admins> admins = new ArrayList<>();
-       adminRepository.findAll().forEach(admins::add);
+    public List<PersonVisualisationDto> getAllAdmins() {
+       List<PersonVisualisationDto> admins = new ArrayList<>();
+       adminRepository.getAllAdmins().forEach(admins::add);
        if (admins.isEmpty()) throw new RuntimeException("adminlar qoshilmagan , iltimos yangi admin qoshing ");
         else return admins;
+    }
+
+    @Override
+    public Admins cast(AdminReserve adminReserve) {
+        Admins admins = new Admins();
+        admins.setPassword(adminReserve.getPassword());
+        admins.setEmail(adminReserve.getEmail());
+        admins.setFirstName(adminReserve.getFirsName());
+        admins.setLastName(adminReserve.getLastName());
+        admins.setOneTimePassword(adminReserve.getOneTimePassword());
+        admins.setPhoneNumber(adminReserve.getPhoneNumber());
+        admins.setCreatedTime(new Date(System.currentTimeMillis()));
+        admins.setActive(true);
+        admins.setUsername(adminReserve.getUsername());
+        admins.setOtpRequestedTime(adminReserve.getOtpRequestedTime());
+
+        if (roleService.getRoleByName(adminReserve.getRoleName()) == null){
+            Role role = new Role();
+            role.setName(adminReserve.getRoleName());
+            roleService.save(role);
+            admins.setRoles(Collections.singletonList(role));
+        } else {
+            Role role = roleService.getRoleByName(adminReserve.getRoleName());
+            admins.setRoles(Collections.singletonList(role));
+        }
+        return admins;
     }
 }
 

@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import shakh.supermarketdemo.data.Debitors;
+import shakh.supermarketdemo.dto.PersonVisualisationDto;
 import shakh.supermarketdemo.service.DebitorService;
 
 import java.net.URI;
@@ -20,7 +21,7 @@ public class DebitorsController {
     }
 
     @PostMapping("save")
-    public ResponseEntity<Debitors> addDebitors(@RequestBody Debitors debitors) {
+    public ResponseEntity<Debitors> addDebitors(@RequestBody PersonVisualisationDto debitors) {
         Debitors debitor = debitorService.save(debitors);
         if (debitors == null) throw new RuntimeException("cannot save debitors");
 
@@ -38,8 +39,8 @@ public class DebitorsController {
     }
 
     @GetMapping("get/all")
-    public ResponseEntity<List<Debitors>> getAllDebitors() {
-        List<Debitors> debitors = debitorService.getAllDebitors();
+    public ResponseEntity<List<PersonVisualisationDto>> getAllDebitors() {
+        List<PersonVisualisationDto> debitors = debitorService.getAllDebitors();
         return ResponseEntity.ok(debitors);
     }
 }

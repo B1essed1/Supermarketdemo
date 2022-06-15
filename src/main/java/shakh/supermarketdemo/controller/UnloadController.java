@@ -47,9 +47,7 @@ public class UnloadController {
 
     @PostMapping("/unload/save")
     public ResponseEntity<Unload> saveOnlyUnload(@RequestBody UnloadDto unloadDto) {
-        Unload unloaded = unloadDto.convertToUnload(productService);
-
-        unloadService.save(unloaded);
+        Unload unloaded = unloadService.unloadProduct(unloadDto);
 
         URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(unloaded.getId()).toUri();

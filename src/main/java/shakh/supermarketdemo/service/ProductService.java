@@ -1,6 +1,7 @@
 package shakh.supermarketdemo.service;
 
 import shakh.supermarketdemo.data.Product;
+import shakh.supermarketdemo.dto.ProductVisualisationDto;
 
 import java.util.List;
 import java.util.Set;
@@ -13,13 +14,13 @@ public interface ProductService {
 
     void hardDeleteProductById(Long id);
 
-    List<Product> getProductByFewAndAlert();
+    List<ProductVisualisationDto> getProductByFewAndAlert();
 
     Boolean checkProductByBarcode(int barcode);
 
-    Product findByBarcode(int barcode);
+    ProductVisualisationDto findByBarcode(int barcode);
 
-    Set<Product> getAllProduct();
+    List<ProductVisualisationDto> getAllProduct();
 
     Product getProductById(Long id);
 }

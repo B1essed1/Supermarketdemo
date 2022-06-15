@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -26,11 +27,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String[] PUBLIC_URLS = {
             "/v2/api-docs",
             "/swagger-resources/**",
+            "/swagger-ui/index.html",
             "/swagger-ui/**",
+            "/swagger-ui.html",
             "/webjars/**",
             "/login",
-            "/api/admins/refresh/token"
+            "/api/admins/refresh/token",
+            "/api/admins/registration",
+            "/api/admins/confirmation",
+            "/api/admins/resend/otp"
     };
+
+/*
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web.ignoring().antMatchers(PUBLIC_URLS);
+    }
+*/
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -42,9 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                         .cors().and()
                         .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll();
-        http.authorizeRequests().antMatchers("/api/admins/**").hasAnyAuthority("MANAGER");
-        http.authorizeRequests().antMatchers("/api/orders/**").hasAnyAuthority("ADMIN");
-        http.authorizeRequests().anyRequest().authenticated();
+        //http.authorizeRequests().antMatchers("/api/admins/**").hasAnyAuthority("MANAGER");
+        //http.authorizeRequests().antMatchers("/api/orders/**").hasAnyAuthority("ADMIN");
+        http.authorizeRequests().anyRequest().permitAll();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.addFilter(new CustomAuthenticationFilter(authenticationManagerBean()));
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

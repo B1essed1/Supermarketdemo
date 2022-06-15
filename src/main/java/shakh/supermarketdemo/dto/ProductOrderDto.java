@@ -32,7 +32,9 @@ public class ProductOrderDto {
     List<OrderItem> orderItems = new ArrayList<>();
     private Long debitorId;
 
-    private String debitorFullName;
+    private String firsName;
+    private String lastName;
+    private String additionalDetails;
 
     private Boolean isActive;
 
@@ -55,7 +57,9 @@ public class ProductOrderDto {
 
         if (productOrder.getDebitors() != null) {
             setDebitorId(productOrder.getDebitors().getId());
-            setDebitorFullName(productOrder.getDebitors().getFullName());
+            setFirsName(productOrder.getDebitors().getFirstName());
+            setLastName(productOrder.getDebitors().getLastName());
+            setAdditionalDetails(productOrder.getDebitors().getAdditionalDetails());
         }
 
         if (productOrder.getAdmins() != null) {
@@ -89,7 +93,6 @@ public class ProductOrderDto {
             Admins admins = adminService.getAdminById(adminId);
             productOrder.setAdmins(admins);
         }
-
         return productOrder;
     }
 }
